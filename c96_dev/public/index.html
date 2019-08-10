@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <meta http-equiv="expires" content="0" />
+    
+    <title>C96 告知ページ</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:title" content="ワンルームカーニバル | C96 デレステルーム合同誌">
+    <meta property="og:site_name" content="ワンルームカーニバル | C96 デレステルーム合同誌">
+    <meta property="og:description" content="アイテムをタップ！">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="http://amaai-poconuts.com/c96/">
+    <meta property="og:image" content="http://amaai-poconuts.com/c96/res/img/card4.png">
+    <!-- <meta name="twitter:card" content="summary"> -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="http://amaai-poconuts.com/c96/">
+    <meta name="twitter:image" content="http://amaai-poconuts.com/c96/res/img/card4.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.0/baguetteBox.min.css"/>
+    <link rel="stylesheet" type="text/css" media="screen" href="./css/style.css" />
+
+    <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.0.2/pixi.js"></script> -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/TweenMax.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.0.1/pixi.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.0.1/plugins/PixiPlugin.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.11.0/baguetteBox.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+</head>
+
+<body>
+    <div id="loading">
+        <div id="loading-body">
+            <img src="./res/img/room/loading.gif">
+            <img src="./res/img/room/loading_label.png">
+        </div>
+    </div>
+    <div id="room-wrapper">
+        <div id="room">
+        </div>
+    </div>
+    <div id="main">
+
+        <div id="copy" class="main-section">
+            <!-- <h1 class="section-title">「ただいま。」と口に出来るルームへ―</h1> -->
+            <h1 class="section-title">★☆ようこそデレステルーム合同のページへ☆★</h1>
+        </div>
+
+        <div id="info-wrapper" class="main-section">
+            <!-- <h2 class="section-title">本の情報</h2> -->
+            <div id="info">
+                <a href="./res/img/cover.jpg">
+                    <div id="cover-image">
+                        <img src="./res/img/cover-mid.jpg" />
+                    </div>
+                </a>    
+                <div id="info-content">
+                    <div class="info-item">
+                        <h3>タイトル</h3>
+                        <p>ワンルーム カーニバル</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>頒布イベント</h3>
+                        <p>コミックマーケット96</p>
+                    </div>
+                    <div class="info-item">
+                        <p>日時　2019/8/11 (日)(3日目)</p>
+                        <p>会場　東京ビッグサイト 南展示棟</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>頒布サークル(主催)</h3>
+                        <p>あま～いポコナッツ(めごちも)</p>
+                        <p>スペース番号　南ホ-36b</p>
+                    </div>
+                    <div class="info-item">
+                        <h3>仕様・お値段</h3>
+                        <p>A5/本文モノクロ/84ページ</p>
+                        <p>1,000円</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="writers-wrapper" class="main-section">
+            <h2 class="section-title">描いてる人たち(五十音順,敬称略)</h2>
+            <p>(クリックでサンプル表示)</p>
+            <div id="writers">
+                <div class="writer" data-writer="inu">
+                        <div class="writer-name">犬</div>
+                        <div class="writer-icon"><img src="./res/img/room/inu_teaset.png"></div>
+                </div>
+                <div class="writer" data-writer="irijako">
+                    <div class="writer-name">いりじゃこ</div>
+                    <div class="writer-icon"><img src="./res/img/room/irijako_harigami.png"></div>
+                </div>
+                <div class="writer" data-writer="usatore">
+                    <div class="writer-name">うさとれ</div>
+                    <div class="writer-icon"><img src="./res/img/room/usatore_gakushudesk.png"></div>
+                </div>
+                <div class="writer" data-writer="gobori">
+                    <div class="writer-name">gobori</div>
+                    <div class="writer-icon"><img src="./res/img/room/gobori_bmm.png"></div>
+                </div>
+                <div class="writer" data-writer="daishinrin">
+                    <div class="writer-name">大森林</div>
+                    <div class="writer-icon"><img src="./res/img/room/daishinrin_coooymeshi.png"></div>
+                </div>
+                <div class="writer" data-writer="chi_kun">
+                    <div class="writer-name">ちーくん</div>
+                    <div class="writer-icon"><img src="./res/img/room/chiikun_stick.png"></div>
+                </div>
+                <div class="writer" data-writer="chiba">
+                    <div class="writer-name">千葉</div>
+                    <div class="writer-icon"><img src="./res/img/room/chiba_tamatebako.png"></div>
+                </div>
+                <div class="writer" data-writer="chanja">
+                    <div class="writer-name">チャンジャ</div>
+                    <div class="writer-icon"><img src="./res/img/room/chanja_hanako.png"></div>
+                </div>
+                <div class="writer" data-writer="tokumeikibou">
+                    <div class="writer-name">匿名希望</div>
+                    <div class="writer-icon"><img src="./res/img/room/tokumeikibou_tritelepo.png"></div>
+                </div>
+                <div class="writer" data-writer="najima">
+                    <div class="writer-name">ナ縞</div>
+                    <div class="writer-icon"><img src="./res/img/room/najima_curryaroma.png"></div>
+                </div>
+                <div class="writer" data-writer="narihayao">
+                    <div class="writer-name">なりはやお</div>
+                    <div class="writer-icon"><img src="./res/img/room/narihayao_usasensor.png"></div>
+                </div>
+                <div class="writer" data-writer="niza">
+                    <div class="writer-name">新座</div>
+                    <div class="writer-icon"><img src="./res/img/room/niza_mado.png"></div>
+                </div>
+                <div class="writer" data-writer="ni_nana">
+                    <div class="writer-name">にーなな</div>
+                    <div class="writer-icon"><img src="./res/img/room/ninana_zangai.png"></div>
+                </div>
+                <div class="writer" data-writer="herohero">
+                    <div class="writer-name">へろへろ</div>
+                    <div class="writer-icon"><img src="./res/img/room/herohero_yashinoki.png"></div>
+                </div>
+                <div class="writer" data-writer="marutoyo">
+                    <div class="writer-name">マルトヨ</div>
+                    <div class="writer-icon"><img src="./res/img/room/marutoyo_catalog.png"></div>
+                </div>
+                <div class="writer" data-writer="megochimo">
+                    <div class="writer-name">めごちも</div>
+                    <div class="writer-icon"><img src="./res/img/room/buta.png"></div>
+                </div>
+                <div class="writer" data-writer="unity_kong">
+                    <div class="writer-name">UNITY KONG</div>
+                    <div class="writer-icon"><img src="./res/img/room/unitykong_takoyakiki.png"></div>
+                </div>
+                <div class="writer hidden"></div>
+                <div class="writer hidden"></div>
+                <div class="writer hidden sp-none"></div>
+                <div class="writer hidden sp-none"></div>
+                <div class="writer hidden sp-none"></div>
+                <div class="writer hidden sp-none"></div>
+            </div>
+        </div>
+    </div>
+    <div id="footer">
+        <p>ワンルームカーニバルはアイドルマスターシンデレラガールズの</p>
+        <p>二次創作同人誌です</p>
+    </div>
+    <!-- <div id="gallery-megochimo" style="display:none">
+        <a href="./res/img/room/mego1.png" data-caption="(1/2)">
+            <img src="./res/img/room/chara.png">
+        </a>
+        <a href="./res/img/room/mego2.jpg" data-caption="(2/2)">
+            <img src="./res/img/room/mego2.jpg">
+        </a>
+    </div> -->
+    <div id="gallery-irijako" style="display:none">
+        <a href="./res/img/sample/irijako.jpg" data-caption="クリックで閉じる">
+        </a>
+    </div>
+    <div id="gallery-inu" style="display:none">
+        <a href="./res/img/sample/inu.jpg" data-caption="クリックで閉じる">
+        </a>
+    </div>
+    <div id="gallery-usatore" style="display:none">
+        <a href="./res/img/sample/usatore.jpg" data-caption="クリックで閉じる">
+        </a>
+    </div>
+    <div id="gallery-gobori" style="display:none">
+        <a href="./res/img/sample/gobori.jpg" data-caption="クリックで閉じる">
+        </a>
+    </div>
+    <div id="gallery-daishinrin" style="display:none">
+        <a href="./res/img/sample/daishinrin.jpg" data-caption="クリックで閉じる">
+        </a>
+    </div>
+    <div id="gallery-chi_kun" style="display:none">
+        <a href="./res/img/sample/chi-kun.jpg" data-caption="クリックで閉じる">
+        </a>
+    </div>
+    <div id="gallery-chiba" style="display:none">
+        <a href="./res/img/sample/chiba.jpg" data-caption="クリックで閉じる">
+        </a>
+    </div>
+    <div id="gallery-chanja" style="display:none">
+        <a href="./res/img/sample/chanja.jpg" data-caption="クリックで閉じる">
+        </a>
+    </div>
+    <div id="gallery-tokumeikibou" style="display:none">
+        <a href="./res/img/sample/tokumekibou.jpg" data-caption="クリックで閉じる">
+        </a>
+    </div>
+    <div id="gallery-najima" style="display:none">
+        <a href="./res/img/sample/najima.jpg" data-caption="クリックで閉じる">
+        </a>
+    </div>
+    <div id="gallery-narihayao" style="display:none">
+        <a href="./res/img/sample/narihayao.jpg" data-caption="クリックで閉じる">
+        </a>
+    </div>
+    <div id="gallery-niza" style="display:none">
+        <a href="./res/img/sample/niiza.jpg" data-caption="クリックで閉じる">
+        </a>
+    </div>
+    <div id="gallery-ni_nana" style="display:none">
+        <a href="./res/img/sample/ni-nana.jpg" data-caption="クリックで閉じる">
+        </a>
+    </div>
+    <div id="gallery-herohero" style="display:none">
+        <a href="./res/img/sample/herohero.jpg" data-caption="クリックで閉じる">
+        </a>
+    </div>
+    <div id="gallery-marutoyo" style="display:none">
+        <a href="./res/img/sample/marutoyo.jpg" data-caption="クリックで閉じる">
+        </a>
+    </div>
+    <div id="gallery-megochimo" style="display:none">
+        <a href="./res/img/sample/megochimo.jpg" data-caption="クリックで閉じる">
+        </a>
+    </div>
+    <div id="gallery-unity_kong" style="display:none">
+        <a href="./res/img/sample/UNITY_KONG.jpg" data-caption="クリックで閉じる">
+        </a>
+    </div>
+
+
+    <!-- <script type="module" src="../../src/js/main.js"></script> -->
+    <script src="./js/bundle.js"></script>
+</body>
+
+</html>
