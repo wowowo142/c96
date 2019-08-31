@@ -17,7 +17,7 @@ C96でめごちもさんが発行した合同誌の[告知ページ](http://amaa
 * ルーム風機能の概要・実装のポイント
 * (おまけ)SpineアニメーションをPixiで動かす
 
-想定読者は、JavaScriptやFlash(ActionScript)の知識が少しあってぐりぐり動かせるWebサイトを作ったりしてみたい人(~PixiJSの基礎)、なんとなくJavaScript(ES6)が書けて告知サイトの実装が気になる人(ルーム機能~)です。 
+想定読者は、JavaScriptやFlash(ActionScript)の知識が少しあってぐりぐり動かせるWebサイトを作ったりしてみたい人(～PixiJSの基礎)、なんとなくJavaScript(ES6)が書けて告知サイトの実装が気になる人(ルーム機能～)です。 
 
 ## なんで書いた？
 
@@ -42,7 +42,7 @@ Flashからの乗り換え先としてわりとよさげ(Flash未経験なので
 #### <a href="#1-7">1.7 オブジェクトをドラッグして動かす</a>
 #### <a href="#1-8">1.8 毎フレーム何らかの処理を実行する</a>
 #### <a href="#1-9">1.9 キーボードが押されたときにオブジェクトを動かす</a>
-#### <a href="#1-10">~~1.10 パラパラ(フレーム)アニメーションするスプライトを作る~~~</a>
+#### <a href="#1-10">~1.10 パラパラ(フレーム)アニメーションするスプライトを作る~</a>
 #### <a href="#1-11">1.11 Tickerを使わずにアニメーションする(別ライブラリを併用)</a>
 #### <a href="#1-12">1.12 テキストを表示する</a>
 #### <a href="#1-13">1.13 オブジェクト同士の当たり判定</a>
@@ -121,12 +121,16 @@ Pixiを使ったプログラムを動かすには、サーバーが必要とな�
 
 2. 言語設定を変更する  
 VSCodeを起動し、下の画像の赤丸のボタンをクリックして拡張機能の追加画面を開きます。<br><br>
-![img](./kaisetsu_img/vscode_extension.png)  
+
+<img src="./kaisetsu_img/vscode_extension.PNG"/>  
+
 <br>
 検索窓が表示されるので、"Japanese Language Pack for Visual Studio Code
 "と入力し、一番上に出てくるものの"install"をクリックします。これはMicrosoftが配布しているVSCodeの日本語化パッケージです。インストールが完了したら、一度VSCodeを再起動してください。  <br><br>
 再起動したら、下の画像のように、[View]→[Command Palette]を選択します。  <br><br>
-![img](./kaisetsu_img/vscode_command.png) 
+
+![img](./kaisetsu_img/vscode_command.PNG) 
+
 <br><br>
 入力窓が表示されるので、`>Configure Display Language`と入力しエンターキーを押します。  
 使用可能な言語の一覧が表示されるので、'ja'をクリックします。すると、再起動を促すダイアログが表示されるので、"restart"をクリックして再起動します。これでメニュー類が日本語されるはずです。   
@@ -141,7 +145,7 @@ VSCodeを起動し、下の画像の赤丸のボタンをクリックして拡�
 
 最後に、この解説ページのトップから、サンプル一式をダウンロードしましょう。
 
-![img](./kaisetsu_img/download.png)
+![img](./kaisetsu_img/download.PNG)
 
 画像の中段右にある緑色の"Clone or download"ボタンをクリックし、開いたメニューから"Download ZIP"をクリックして任意の場所に保存、zipを解凍します。  
 
@@ -149,11 +153,11 @@ VSCodeを起動し、下の画像の赤丸のボタンをクリックして拡�
 
 フォルダが開けたら、先ほどインストールしたLive Serverを起動しましょう。
 
-![img](./kaisetsu_img/vscode_liveserver.png) 
+![img](./kaisetsu_img/vscode_liveserver.PNG) 
 
 画像の右下にある"Go Live"ボタンをクリックします。サーバーが起動すると、デフォルトのブラウザが起動し、このフォルダのトップページ(たいていは http://127.0.0.1:5500)が開くはずです。ボタンがない場合は、拡張機能インストールの手順を再確認してください。
 
-![img](./kaisetsu_img/localindex.png) 
+![img](./kaisetsu_img/localindex.PNG) 
 
 おそらく、ブラウザには↑の画像のような画面が表示されていると思います。サンプルプログラムはこの中の"sample"フォルダで動かしますので、"sample"をクリックしてページを移動してください。
 
@@ -419,6 +423,10 @@ app.stage.addChild(line)
 前項と同様に、`/sample/sample.js` の\/\*1.5\*\/ の処理のコメントを外して上書き保存してください。  
 
 ``` JS
+/**
+ * 1.5 
+ */
+ 
 // 新しいコンテナを生成
 let sampleContainer = new PIXI.Container();
 
@@ -470,6 +478,10 @@ for (let i=0; i < 2; i++) {
 中央のぶたをクリックするとダイアログが表示されるようになったと思います。
 
 ``` JS
+/**
+ * 1.6 
+ */
+ 
 // 中央のぶたのインタラクション(イベント)を有効化
 butaSprite.interactive = true;
 
@@ -500,6 +512,10 @@ Pixiのインタラクションに使用できるイベントの一覧は[こち
 でかいぶたをドラッグアンドドロップできるようになったと思います。
 
 ``` JS
+/**
+ * 1.7 
+ */
+ 
 // でかいぶたのインタラクション(イベント)を有効化
 butaSprite2.interactive = true;
 
@@ -557,6 +573,10 @@ function moveButa(e) {
  この項で簡単なアニメーションっぽいことができるようになります。\/\*1.8\*\/ の処理のコメントを外して上書き保存してください。 
 
 ``` JS
+/**
+ * 1.8 
+ */
+ 
 // フレーム更新時の処理(≒ループ処理)を追加する
 app.ticker.add(animate);
 let amountTime = 0;
@@ -595,6 +615,10 @@ Pixiには(というかたいていのライブラリには)キーが押され�
 \/\*1.9\*\/ の処理のコメントを外して上書き保存してください。  
 
 ``` JS
+/**
+ * 1.9 
+ */
+ 
 // 押されたキーの情報を格納する配列を用意
 const LEFT = 0;
 const UP = 1;
@@ -651,7 +675,7 @@ Pixiの機能とあんまり関係ないので補足することもあんまり�
 スマホでも似たようなことしたい場合は、上下左右のボタンをスプライトで生成して、それぞれの`pointerdown`/`pointerup`に`keydown`/`keyup`と似たような処理を書いてやるとできるかと思います。  
 
 
-### <span id="1-10">~~1.10 パラパラ(フレーム)アニメーションするスプライトを作る~~~</span>  
+### <span id="1-10">~~1.10 パラパラ(フレーム)アニメーションするスプライトを作る~~</span>  
 素材がないので断念しました。  
 公式のサンプルのリンクだけ貼っておきます。[Animated Sprite - Jet - PixiJS Examples](https://pixijs.io/examples/#/sprite/animatedsprite-jet.js)  
 
@@ -673,7 +697,10 @@ TweenMaxの容量は本体とPixiプラグインセットで120KB程度です。
 \/\*1.11\*\/ の処理のコメントを外して上書き保存してください。
 
 ``` JS
-
+/**
+ * 1.11 
+ */
+ 
 // ロッカーを4つほど取り出す
 let l1 = lockers[1];
 let l2 = lockers[2];
