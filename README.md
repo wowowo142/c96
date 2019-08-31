@@ -145,7 +145,7 @@ VSCodeを起動し、下の画像の赤丸のボタンをクリックして拡�
 
 最後に、この解説ページのトップから、サンプル一式をダウンロードしましょう。
 
-![img](./kaisetsu_img/download.PNG)
+![img](./kaisetsu_img/download.png)
 
 画像の中段右にある緑色の"Clone or download"ボタンをクリックし、開いたメニューから"Download ZIP"をクリックして任意の場所に保存、zipを解凍します。  
 
