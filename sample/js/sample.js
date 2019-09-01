@@ -1,21 +1,22 @@
 /**
- * pixijs
+ * pixijs基礎サンプル
  */
 
 
  /** =======================================================================================
  * 1.3 Pixiアプリケーションを生成する
- */  
-// Pixiアプリケーション生成
-let app = new PIXI.Application({
-    width: 600,                 // スクリーン(ビュー)横幅 
-    height: 600,                // スクリーン(ビュー)縦幅  
-    backgroundColor: 0x1099bb,  // 背景色 16進 0xRRGGBB
-    autoDensity: true,
-});
-// HTMLの<main id="app"></main>の中に上で作ったPIXIアプリケーション(app)のビュー(canvas)を突っ込む
-let el = document.getElementById('app');
-el.appendChild(app.view);
+ */ 
+
+// // Pixiアプリケーション生成
+// let app = new PIXI.Application({
+//     width: 600,                 // スクリーン(ビュー)横幅 
+//     height: 600,                // スクリーン(ビュー)縦幅  
+//     backgroundColor: 0x1099bb,  // 背景色 16進 0xRRGGBB
+//     autoDensity: true,
+// });
+// // HTMLの<main id="app"></main>の中に上で作ったPIXIアプリケーション(app)のビュー(canvas)を突っ込む
+// let el = document.getElementById('app');
+// el.appendChild(app.view);
 
 
 
@@ -49,6 +50,8 @@ el.appendChild(app.view);
 // // 大きさを変えてみる
 // butaSprite2.scale.x = 1.5;
 // butaSprite2.scale.y = 1.5;
+// // 半透明にしてみる
+// butaSprite2.alpha = 0.9;
 // // 回転してみる
 // butaSprite2.rotation = Math.PI / 3;          // (ラジアンで指定)
 // // butaSprite2.angle = 60;                        // (度数で指定)
@@ -61,9 +64,9 @@ el.appendChild(app.view);
 
 
 
-/** 
- * 図形(PIXI.Graphics) draw~~()はここに書いたもの以外にもあります
- */
+// /** 
+//  * 図形(PIXI.Graphics) draw~~()はここに書いたもの以外にもあります
+//  */
 
 // // 楕円を作る
 // let ellipse = new PIXI.Graphics()       // メソッドチェーンで描画するので、;(セミコロン)を付けない   
@@ -177,6 +180,9 @@ el.appendChild(app.view);
 // // 中央のぶたのインタラクション(イベント)を有効化
 // butaSprite.interactive = true;
 
+// // ぶたにマウスが重なった時、表示をポインターにする
+// butaSprite.buttonMode = true;
+
 // // 中央のぶたスプライトにクリックイベントのリスナーを設定する
 // // オブジェクト.on('イベントの種類', イベントハンドラ) で設定する
 // butaSprite.on('pointertap',showAlert);
@@ -200,6 +206,9 @@ el.appendChild(app.view);
 
 // // でかいぶたのインタラクション(イベント)を有効化
 // butaSprite2.interactive = true;
+
+// // ぶたにマウスが重なった時、表示をポインターにする
+// butaSprite2.buttonMode = true;
 
 // // でかいぶたスプライトにイベントリスナーを設定する
 // // .on()をつなげて連続で設定することができる
@@ -241,8 +250,25 @@ el.appendChild(app.view);
 
 
 
+
 /** =======================================================================================
- * 1.8 毎フレーム何らかの処理を実行する
+ * 1.8 オブジェクトの前後関係(描画順序)を変更する
+ */
+
+// // zIndexによる自動ソートを有効化(どんなコンテナでも設定可能)
+// app.stage.sortableChildren = true;
+
+// // でかいぶたを最前面に描画(どのオブジェクトもzIndexの初期値は0)
+// butaSprite2.zIndex = 10;
+
+// // でかいぶたを最背面に描画
+// // butaSprite2.zIndex = -1;
+
+
+
+
+/** =======================================================================================
+ * 1.9 毎フレーム何らかの処理を実行する
  */
 
 // // フレーム更新時の処理(≒ループ処理)を追加する
@@ -275,7 +301,7 @@ el.appendChild(app.view);
 
 
 /** =======================================================================================
- * 1.9 キーボードが押されたときにオブジェクトを動かす
+ * 1.10 キーボードが押されたときにオブジェクトを動かす
  */
 
 // // 押されたキーの情報を格納する配列を用意
@@ -332,7 +358,7 @@ el.appendChild(app.view);
 
 
 /** =======================================================================================
- * 1.10 パラパラ(フレーム)アニメーションするスプライトを作る (素材がないため断念)
+ * 1.11 パラパラ(フレーム)アニメーションするスプライトを作る (素材がないため断念)
  * [Animated Sprite - Jet - PixiJS Examples](https://pixijs.io/examples/#/sprite/animatedsprite-jet.js)
  */
 
@@ -341,7 +367,7 @@ el.appendChild(app.view);
 
 
  /** =======================================================================================
- * 1.11 Tickerを使わずにアニメーションする(別ライブラリを併用)
+ * 1.12 Tickerを使わずにアニメーションする(別ライブラリを併用)
  */
 
 // // ロッカーを4つほど取り出す
@@ -376,48 +402,211 @@ el.appendChild(app.view);
 //     );
 
 // // 反復で1回リピートし、完了時に色を変える
-// // TweenMax.to(l2, 0.5, 
-// //     {   
-// //         pixi: { 
-// //             y: l2.y - 200, 
-// //         },
-// //         ease: Power1.easeInOut, 
-// //         repeat: 2,
-// //         yoyo: true,
-// //         onComplete: () => { l2.tint = 0xff0000 } // 完了時に色を変える
-// //     }
-// // );
+// TweenMax.to(l2, 0.5, 
+//     {   
+//         pixi: { 
+//             y: l2.y - 200, 
+//         },
+//         ease: Power1.easeInOut, 
+//         repeat: 2,
+//         yoyo: true,
+//         onComplete: () => { l2.tint = 0xff0000 } // 完了時に色を変える
+//     }
+// );
 
 // // 無限リピート
-// // TweenMax.to(l3, 0.5, 
-// //     {   
-// //         pixi: { 
-// //             y: l3.y - 200, 
-// //         },
-// //         ease: Power1.easeInOut, 
-// //         repeat: -1,
-// //         yoyo: true
-// //     }
-// // ); 
+// TweenMax.to(l3, 0.5, 
+//     {   
+//         pixi: { 
+//             y: l3.y - 200, 
+//         },
+//         ease: Power1.easeInOut, 
+//         repeat: -1,
+//         yoyo: true
+//     }
+// ); 
 
 // // 色々詰め込み
-// // // 回転
-// // TweenMax.to(l4, 1.0, { pixi: { angle: 359}, ease: Power0.easeNone, repeat: -1,});
-// // // 色々
-// // let l4Tween = TweenMax.to(l4, 1.0, 
-// //     {   
-// //         pixi: { 
-// //             y: l4.y - 200, 
-// //             scaleX: l4.scale.x * 1.5,
-// //             scaleY: l4.scale.y * 1.5,
-// //             tint: 0xff0000,
-// //         },
-// //         ease: Power1.easeInOut, 
-// //         repeat: -1,
-// //         yoyo: true
-// //     }
-// // ); 
+// // 回転
+// TweenMax.to(l4, 1.0, { pixi: { angle: 359}, ease: Power0.easeNone, repeat: -1,});
+// // 色々
+// let l4Tween = TweenMax.to(l4, 1.0, 
+//     {   
+//         pixi: { 
+//             y: l4.y - 200, 
+//             scaleX: l4.scale.x * 1.5,
+//             scaleY: l4.scale.y * 1.5,
+//             tint: 0xff0000,
+//         },
+//         ease: Power1.easeInOut, 
+//         repeat: -1,
+//         yoyo: true
+//     }
+// ); 
 
 
 // // 戻り値のtweenを使ってアニメーションの一時停止や再開ができる
 // // setTimeout(() => { l4Tween.pause() }, 1000);    // 1秒後に最後のロッカーの回転以外のアニメーションを停止
+
+
+
+ /** =======================================================================================
+ * 1.13 テキストを表示する(+外部フォントの適用)
+ */
+
+// PIXI.TextMetrics.BASELINE_SYMBOL += "あ｜";     // 日本語を見切れずに表示するためのおまじない
+
+// // デフォルトのフォントでテキストを表示する
+// // new PIXI.Text(文字列, テキストスタイル(オブジェクト))
+// let text =  new PIXI.Text('あいうアイウABC漢字', 
+//                 { 
+//                 //   fontFamily: 'Arial',   // フォント
+//                   fontSize: 50,
+//                   fill : 0x000000,       // 文字色
+//                 //   stroke: 0xffffff,      // アウトラインの色
+//                 //   strokeThickness: 3,    // アウトラインの太さ   
+//                 //   align: 'center',       // 文字揃え(複数行の場合に有効)     
+//                 });
+// text.x = 10;
+// text.y = 10;
+// // text.text = '0123\n456789';   // テキストの書き換え
+// app.stage.addChild(text);
+
+// // 外部フォントをロードする
+// WebFont.load (
+// {
+//     // Google Fontsの場合
+//     google:
+//     {
+//         families: ['Noto+Serif+JP']   
+//     },
+//     // カスタム(自分のサーバーにファイルがあるとか)の場合
+//     custom:
+//     {
+//         families: ['幻ノにじみ明朝'],
+//         urls: ['./css/font.css']    // @font-faceを定義したcssのURL
+//     },
+//     active: () =>
+//     {
+//         // フォント読み込み成功時
+//         // Google Fontsから読み込んだフォントでテキストを表示する(なぜか漢字が読み込まれない)
+//         let text2 =  new PIXI.Text('あいうアイウABC漢字', 
+//                 { 
+//                     fontFamily: 'Noto Serif JP',
+//                     fontSize: 50,
+//                     fill : 0x000000,      // 文字色     
+//                 });
+//         text2.x = 10;
+//         text2.y = 100;
+//         app.stage.addChild(text2);
+
+//         // カスタムフォントでテキストを表示する
+//         let text3 =  new PIXI.Text('あいうアイウABC漢字', 
+//                 { 
+//                     fontFamily: '幻ノにじみ明朝',
+//                     fontSize: 50,
+//                     fill : 0x000000,      // 文字色     
+//                 });
+//         text3.x = 10;
+//         text3.y = 200;
+//         app.stage.addChild(text3);
+//     },
+//     inactive: () =>
+//     {
+//         // フォント読み込み失敗時
+//         console.log('font loading failed');
+//     }
+// });
+
+
+
+
+
+ /** =======================================================================================
+ * 1.14 点とオブジェクトの衝突判定
+ */
+
+// // 1.9で使ったロッカーを使用する(分かりやすいように基準点を中心に変更)
+// locker.anchor.set(0.5);
+
+// // PIXI.Point(平面上の点オブジェクト)を生成
+// let p = new PIXI.Point();   
+
+// // いくつかのオブジェクトをinteractiveにする(ぶたとでかいぶたは既にinteractive)
+// circle.interactive = true;
+// ellipse.interactive = true;
+// polygon.interactive = true;
+// l1.interactive = true;
+// l2.interactive = true;
+// l3.interactive = true;
+
+// // 適当に名前をつける
+// butaSprite.namae = "ぶた";       
+// butaSprite2.namae = "でかいぶた";
+// circle.namae = "円"
+// ellipse.namae = "楕円"
+// polygon.namae = "六角形"
+// l1.namae = "ロッカー1"
+// l2.namae = "ロッカー2"
+// l3.namae = "ロッカー3"
+
+// // オブジェクトの配置完了をちょっと待ってから衝突判定のループを回す (※これはクソコードなので実践で使用しないでください)
+// setTimeout( () => {
+//     app.ticker.add(() => {
+//         // pにlockerのワールド座標点を代入
+//         // (普通のx,yは親コンテナ基準のローカル座標。これはルートコンテナ(ここではapp.stage))基準の座標)
+//         p.x = locker.transform.worldTransform.tx;
+//         p.y = locker.transform.worldTransform.ty;   
+
+//         // 衝突判定(hitTest()はinteractiveがtrueのオブジェクトにのみ有効)
+//         let hitObject = app.renderer.plugins.interaction.hitTest(p, app.stage);  // (判定対象の点, 対象とするオブジェクトの入ったコンテナ)
+//         if (hitObject != null) {
+//             // 何かに衝突したら1.13のテキストオブジェクトに書き出す
+//             text.text = hitObject.namae + 'にぶつかった';
+//         }
+//         else {
+//             text.text = 'なんもぶつかってない';
+//         }
+//     });
+// }, 100);
+
+
+
+
+
+ /** =======================================================================================
+ * 1.15 オブジェクトの衝突判定領域をカスタマイズする
+ */
+
+// // hitArea用の形を作る(これはPIXI.Graphicsと異なり、描画オブジェクトではない)
+// let customHitArea = new PIXI.Polygon(
+//     [   // 頂点の渡し方はdrawPolygon()と同じ
+//         -25,30,
+//         5,35,
+//         35,15,
+//         15,-35,
+//         -20,-35,
+//         -35,-10,
+//     ]
+// )
+
+// // hitArea確認用の同じ形のPIXI.Graphics
+// let debug = new PIXI.Graphics()
+// .beginFill(0x000000, 0.75)
+// .drawPolygon([
+//               -25,30,
+//               5,35,
+//               35,15,
+//               15,-35,
+//               -20,-35,
+//               -35,-10,
+//             ])
+// .endFill();
+// butaSprite.hitArea = customHitArea; // カスタム衝突判定領域を設定
+// butaSprite.addChild(debug);         // 実はスプライトにもaddChild()できる
+
+// // 分かりやすいようぶたを大きくする
+// butaSprite.scale.x = butaSprite.scale.y = 1.5;
+
+// // hitAreaは移動・回転・拡大縮小およびpivotの変更には追従するが、anchor(基準点)の変更には追従してくれない
+// // butaSprite.anchor.x += 0.1;
