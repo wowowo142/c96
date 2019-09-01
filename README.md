@@ -915,7 +915,7 @@ WebFont.load (
 
 Web Font Loaderを使う際には、`WebFont.load()`の中に`読み込み元:読み込むフォント`の組を列挙していきます。フォントをどこから取得するか(Google, Typekit, カスタム,...)によって書き方が異なるのですが、ここではGoogle Fontsとカスタム(自分のサーバーなど)から取得する例を紹介します。その他の方法については上に貼ったWeb Font LoaderのGitHubを参照してください。    
 
-Googleの場合は`google`プロパティを作り、その中のfamiliesプロパティに使用するフォント名を設定します。複数のフォントを読み込む場合は配列を使用します。
+Googleの場合は`google`プロパティを作り、その中のfamiliesプロパティに使用するフォント名一覧を配列で設定します。
 
 ``` JS
 google: {
