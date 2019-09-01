@@ -9,7 +9,10 @@
 ## 何これ？誰お前？
 
 地井 a.k.a. たけを(ex.wowowo142)です。 [(誰？)](https://twitter.com/chiisanwo)  
-C96でめごちもさんが発行した合同誌の[告知ページ](http://amaai-poconuts.com/c96/)をPixiJSを使って作りました。  
+C96でめごちもさんが発行した合同誌の[告知ページ](http://amaai-poconuts.com/c96/)をPixiJSを使って作りました。 
+
+![img](./kaisetsu_img/_room.PNG) 
+(※この画像は転載等ご遠慮ください)
 
 このページでは↓のことを解説していきます 
 
@@ -1144,7 +1147,7 @@ Pixiを始める上で、少しでも助けになれば幸いです。
 
 ![img](./kaisetsu_img/room.png) 
 
-(※この画像だけは転載ご遠慮ください)
+(※この画像も転載ご遠慮ください)
 
 
 JSファイルは最終的にBabel→Webpackでバンドルしてます。バグがありますがギリギリIE11でも動きます。  
