@@ -15,7 +15,7 @@ C96でめごちもさんが発行した合同誌の[告知ページ](http://amaa
 
 * <a href="#1">PixiJS(v5)の基礎</a>
 * <a href="#2">(おまけ1)ルーム風機能の概要・実装のポイント</a>
-* <a href="#3">(おまけ2)SpineアニメーションをPixiで動かす</a>
+* <a href="#3">(おまけ2)SpineアニメーションをPixiで動かす(プラグインの使い方)</a>
 
 想定読者は、JavaScriptやFlash(ActionScript)の知識が少しあってぐりぐり動かせるWebサイトを作ったりしてみたい人(～PixiJSの基礎)、なんとなくJavaScript(ES6)が書けて告知サイトの実装が気になる人(ルーム機能～)です。 
 
@@ -51,7 +51,8 @@ Flashからの乗り換え先としてわりとよさげ(Flash未経験なので
 #### <a href="#1-15">1.15 オブジェクトの衝突判定領域をカスタマイズする</a>
 
 
-<br><br>
+<br>
+
 ### <span id="1-1">1.1 PixiJS is 何</span>  
 **初心者向けの説明**  
 [PixiJS](https://www.pixijs.com/)(以下Pixi)はブラウザ上で、様々な2Dグラフィックス処理を実現するためのJavaScriptライブラリです。商用でも無償で使用できます(MITライセンス)。  
@@ -1110,7 +1111,9 @@ butaSprite.scale.x = butaSprite.scale.y = 1.5;
 ### 基礎編ここまで
 
 以上でPixiJSの基礎解説は終わりです。  
-マスクとかフィルターについても書きたかったんですが体力的にキツいのとボロがでそうなのでやめました(要望があればやるかも...)。  
+マスクとかフィルターについても書きたかったんですが体力的にキツいのとボロがでそうなのでやめました(要望があればやるかも...)。 
+
+また、複数のテクスチャを
 
 Pixiを始める上で、少しでも助けになれば幸いです。  
 
@@ -1120,9 +1123,144 @@ Pixiを始める上で、少しでも助けになれば幸いです。
 
 <br><br><br>
 ## <span id="2">2. (おまけ1)ルーム風機能の概要・実装のポイント</span>
+基礎解説で気力が尽きたのでこっからめちゃくちゃ適当になります。  
 
+### ルームの構成  
+正直めちゃくちゃな実装なので見返すのもつらい...使ってないコードも散見されるのでほんとに気になったら見てください。    
+こんな感じでクラス・ファイルに分けてます。    
+
+|クラス名(ファイル名)|概要|  
+|:--|:---|
+|main.js|ルームの下準備(テクスチャ読み込み、フォント読み込みとか)。メイン関数的なのがある。|
+|const.js|定数ファイル。アイテムのパラメータとかもまとまってる。|
+|Room(Room.js)|ルームの本体。appの全体管理。画面を構成するコンテナの管理。イベント管理|
+|MyTextureManager(Texture.js)|シングルトンでテクスチャの読み込み、呼び出しを管理|
+|Item(Item.js)|アイテムクラス(PIXI.Sprite継承)、ItemMultiPartって別クラスが同じファイルにあるけど、使ってない。<br>Composite的な実装しようとしたけど、時間がなくてやめたっぽい。|
+|UIContainer(UI.js)|ボタンとアイテムラベルの管理。<br>UIモード(選択、移動、非表示)の変更管理。UIContainerのアニメーションはRoomでやっている。|
+|Tile,FloorContainer(Floor.js)|ただのSpriteとContainer|
+|Util(Util.js)|使ってない|  
+
+![img](./kaisetsu_img/room.png) 
+(※この画像だけは転載ご遠慮ください)
+
+
+JSファイルは最終的にBabel→Webpackでバンドルしてます。バグがありますがギリギリIE11でも動きます。  
+外部ライブラリの`import`を外せば素の状態でも動きます(最近のブラウザなら)。デバッグ時にいちいちwebpackするのがめんどくさかったのでこんな変な構成になっています。  
+
+
+
+### 実装のポイント  
+
+PixiのAPIについては基礎解説に書いたようなものしか使ってません。何か困ったときは[公式ドキュメント](https://pixijs.download/dev/docs/index.html)か、[公式GitHubのissue](https://github.com/pixijs/pixi.js/issues)かPixi本体のソース見ればなんとかなります。  
+
+<br>
+
+#### 画面上の座標(x,y)をクォータービューのマス(qx,qy)に変換する
+
+![img](./kaisetsu_img/qcoord.png) 
+
+おまかせします。
+
+<br>
+
+#### アイテムの描画順序
+
+今回のルーム風画面のようなクォータービューでは画面の上の方にあるアイテムほど奥にある扱いになります。  
+基本的には、アイテムを入れるコンテナの`sortableChildren`を有効にし、`item.zIndex = item.y` とすればいい感じになります。  
+
+問題は、複数マスにまたがるアイテムです。  
+
+どんな問題かわかりやすく解説されているツイートがあるので、見てください。  
+https://twitter.com/umaaaaaa/status/1026695912721010688
+
+上のツイートの対処法をほぼそのまま実装しています。  
+具体的には、複数マスにまたがるアイテムの場合は読み込み時にテクスチャをトリミングし、1マスサイズに分割したスプライトを作り、1番手前のスプライトをルートとして他のスプライトをそれにぶら下げるようにしています(一部例外あり)。  
+
+テクスチャのトリミングは、`let texture = new PIXI.Texture(ベーステクスチャ(PIXI.BaseTexture), 切り出し部分(PIXI.Rectangle));` みたいな感じでできます。
+
+で、Itemクラスに`multipart`(複数マスアイテム)のフラグを持たせていろいろやっています。
+
+<br>
+
+そのほかは大した事していません。
 
 
 <br><br><br>
-## <span id="3">3. (おまけ2)SpineアニメーションをPixiで動かす</span>
+## <span id="3">3. (おまけ2)SpineアニメーションをPixiで動かす(プラグインの使い方)</span>
+
+(これ書いている間にデレステにプレミアムカット機能が実装されました。ぱっと見Spineで動いてるようっぽい。)  
+
+[Spine](http://ja.esotericsoftware.com/)は、ボーンアニメーションやメッシュアニメーションを作成できるソフトです。  
+(メッシュアニメーションはEssential版($69 USD)では使用できず、Professional版($299 USD)を購入する必要があります。)   
+
+告知ページを数秒放置してると出てくる、しぶりんの腕はSpineで動いています。  
+ここではPixiにSpineアニメーションを取り込む方法を紹介します。(といってもプラグインを導入するだけですが...)  
+
+まず、SpineのJSONエクスポートでアニメーション定義のjson、スプライトシート/テクスチャアトラスを吐き出します。
+
+![img](./kaisetsu_img/spine_export.PNG) 
+
+![img](./kaisetsu_img/spine_export_settings.PNG) 
+
+このとき、テクスチャ・パッカー設定で出力の"ブリード"にチェックを入れておかないと、パーツに輪郭線が表示されてしまうため注意してください。
+
+素材が準備できたら、Pixiに取り込んでいきます。  
+※Spineのバージョンが古いとうまく動かない可能性があります。  
+
+[Pixiの公式が公開しているSpineプラグイン](https://github.com/pixijs/pixi-spine)をインストールします(npmなら`npm i -D pixi-spine`)。
+
+プラグインをインポートします`import 'pixi-spine';`
+
+Spineファイルを読み込み、読み込み完了後Spineオブジェクトを生成、アニメーション名を指定して再生します。
+
+``` JS
+// SpineのJSONファイルを読み込み
+this.app.loader.add('spineanim', './res/spine/spineanim.json')
+.load(onLoadAnim.bind(this));   // 読み込み完了時コールバック
+function onLoadAnim(loader, resources) {
+
+    // Spineオブジェクトを生成してステージに追加
+    var spineObj = new PIXI.spine.Spine(resources.spieanim.spineData);
+    this.app.stage.addChild(spineObj);
+
+    // Spineで付けた名前でアニメーションを再生する
+    // hasAnimation('アニメーション名')でアニメーションが存在するか確認できる 
+    if (spineObj.state.hasAnimation('stand')) {
+
+        // setAnimation(トラック番号, アニメーション名, ループさせるか否か) 
+        spineObj.state.setAnimation(0, 'stand', true);  // ループあり
+        spineObj.state.timeScale = 1.0;  // 再生速度
+    }
+    this.app.start();   // レンダリング開始
+
+
+
+    // Spineのイベントをキャッチする
+    setTimeout(() => {
+        if (spineObj.state.hasAnimation('grab')) {
+            spineObj.state.setAnimation(0, 'grab', false);  // ループなし
+            spineObj.state.timeScale = 1.0;
+
+            spineObj.state.addListener({
+                // アニメーションの完了時に発火
+                complete: (entry) => { 
+                    // 公式サンプルそのまま
+                    console.log('track '+ entry.trackIndex
+                                +' completed '+entry.loopsCount()+' times')   
+                }
+                // そのほかstart,end,dispose,interrupted,
+                // event(あらゆるイベント?第二引数に発火したイベントが渡される)がある
+            })
+        }
+    }, 1000)
+}
+```
+
+以上がSpineアニメーションをPixiで動かす手順になります。
+
+Spineプラグインのより深い使い方については[こちらのドキュメント](https://github.com/pixijs/pixi-spine/blob/master/examples/index.md)を参照してください。  
+
+
+
+## 終わり
 

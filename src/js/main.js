@@ -13,10 +13,6 @@
 
 import { Room } from './Room/Room.js';
 
-// let PIXI = require('pixi.js');
-
-// styles 
-// import '../css/main.scss';
 
 // ルーム
 window.addEventListener('DOMContentLoaded', () => {
@@ -71,7 +67,6 @@ window.addEventListener('DOMContentLoaded', () => {
   room.addSample('marutoyo',baguetteBox.run('#gallery-marutoyo'),gOption);
   room.addSample('megochimo',baguetteBox.run('#gallery-megochimo'),gOption);
   room.addSample('unity_kong',baguetteBox.run('#gallery-unity_kong'),gOption);
-  // room.addGallery('wo',baguetteBox.run('#gallery-wo'),gOption);
 
   WebFont.load(
   {
@@ -82,7 +77,7 @@ window.addEventListener('DOMContentLoaded', () => {
     },
     active: function()
     {
-      // console.log('finish font loading')
+      console.log('finish font loading')
       go();
     },
     inactive: function()
@@ -91,8 +86,8 @@ window.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // let loading = document.querySelector('#loading');
-  // loading.style.display = 'none';
+  let loading = document.querySelector('#loading');
+  loading.style.display = 'none';
 
   // 下準備が全部終わったらルームを生成する
   let go = () => {
@@ -113,42 +108,6 @@ window.addEventListener('DOMContentLoaded', () => {
     })
   };
 
+  go();
 
-
-
-  /**
-     *  ウィンドウリサイズ時の処理
-     *  @todo 外に出す
-     */
-    window.addEventListener('resize',  function() {
-      // resizeRoom();
-    });
-
-
-  /**
-   * ユーティリティ(util.jsに入れる...)
-   */
-
-  const removeCircular = () => {
-    //　Object||ArrayならリストにINして循環参照チェック
-    var checkList = [];
-    return function(key,value){
-        // 初回用
-        if( key==='' ){
-            checkList.push(value);
-            return value;
-        }
-        // Node,Elementの類はカット
-        if( value instanceof Node ){
-            return undefined;
-        }
-        // Object,Arrayなら循環参照チェック
-        if( typeof value==='object' && value!==null ){
-            return checkList.every(function(v,i,a){
-                return value!==v;
-            }) ? value: undefined;
-        }
-        return value;       
-    }
-  }
 });
