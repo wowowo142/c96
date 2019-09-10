@@ -66,7 +66,7 @@ Flashからの乗り換え先としてわりとよさげ(Flash未経験なので
 
 **Pixiでできること**
 * オブジェクト(スプライトや図形)の描画
-* オブジェクトのアニメーション(移動・回転・パラパラアニメーション)
+* オブジェクトのアニメーション(移動・回転・コマ送りアニメーション)
 * フィルター処理
 * オブジェクトとのインタラクション(クリックやドラッグといったユーザー操作の検知)
 
@@ -515,7 +515,7 @@ function showAlert(e) {
 // butaSprite.off('pointertap',showAlert);
 ```
 
-オブジェクトの`on()`メソッドを使ってイベントリスナーを設定することができます。素のJavaScriptで言うところの`addEventListner()`ですが、ハンドラに飛んでくるイベントは[PIXI.interaction.InteractionEvent](https://pixijs.download/dev/docs/PIXI.interaction.InteractionEvent.html)という独自の拡張型です。次のこの解説ではあまり詳細には触れません。  
+オブジェクトの`on()`メソッドを使ってイベントリスナーを設定することができます。素のJavaScriptで言うところの`addEventListner()`ですが、ハンドラに飛んでくるイベントは[PIXI.interaction.InteractionEvent](https://pixijs.download/dev/docs/PIXI.interaction.InteractionEvent.html)という独自の拡張型です。次の項でこのイベントのデータを少し使いますが、この解説ではあまり詳細には触れません。  
 
 イベントリスナーを解除する際は、`off()`メソッドを使用します。  
 
@@ -722,7 +722,7 @@ Pixiの機能とあんまり関係ないので補足することもあんまり�
 
 
 <br><br>
-### <span id="1-11">~~1.11 パラパラ(フレーム)アニメーションするスプライトを作る~~</span>  
+### <span id="1-11">~~1.11 コマ送りアニメーションするスプライトを作る~~</span>  
 素材がないので断念しました。  
 公式のサンプルのリンクだけ貼っておきます。[Animated Sprite - Jet - PixiJS Examples](https://pixijs.io/examples/#/sprite/animatedsprite-jet.js)  
 
