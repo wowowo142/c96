@@ -19,7 +19,7 @@
     "draggable": "^4.2.0",
     "gulp": "^4.0.2",
     "mini-css-extract-plugin": "^0.6.0",
-    "node-sass": "^4.12.0",
+    "node-sass": "^7.0.0",
     "pixi-spine": "^1.5.23",
     "pixi.js": "^5.0.2",
     "sass-loader": "^7.1.0",
